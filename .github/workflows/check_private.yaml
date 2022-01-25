@@ -1,0 +1,13 @@
+---
+name: Check repository is private
+on: [push]
+jobs:
+  check-private:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Fail on public
+        if: ${{!github.event.repository.private}}
+        run: exit 1
